@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
+import Link from 'next/link'
+
 import { useRouter } from 'next/router'
 import styles from '../../styles/Home.module.css'
 
@@ -25,7 +27,6 @@ export default function VideoUpload() {
       await axios.post("/api/videos", data, config)
       router.push({
           pathname: '/',
-         
         });
     } catch (e:any) {
       setError(e.message)
@@ -51,7 +52,12 @@ export default function VideoUpload() {
           <input style={{margin:'10px'}} type="file" id='file' accept=".mp4" onChange={handleSetFile}/>
         </div>
       </form>
-      <button style={{margin:'20px'}} onClick={handleSubmit}>Upload Video</button>
+      <button style={{ margin: '20px' }} onClick={handleSubmit}>Upload Video</button>
+            <div style={{marginTop:'20px'}}>
+       <Link href="/" >
+        <a> Go Back</a>
+        </Link>
+      </div>
     </div>
   );
 }
