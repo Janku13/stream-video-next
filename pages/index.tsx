@@ -37,6 +37,7 @@ const Home = ({ files }: { files: string[] }) => {
     </div>
   )
 }
+
 Home.getInitialProps = async () => {
   const res = await fetch('http://localhost:3000/api/videosList')
   const json = await res.json()
