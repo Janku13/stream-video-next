@@ -39,7 +39,7 @@ function getVideo(req:NextApiRequest, res:NextApiResponse) {
   console.log('range',range);
   
   const videoId = req.query.videoId
-  const videoPath = `./videos/${videoId}.mp4`
+  const videoPath = `./videos/${videoId}`
   if (!fs.existsSync(videoPath)) {
     return res.status(404).send('Cannot find videos')
   }
@@ -52,6 +52,7 @@ function getVideo(req:NextApiRequest, res:NextApiResponse) {
   })
   videoStream.pipe(res)
 }
+
 
 
 export default function handler(

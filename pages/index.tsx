@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import Head from 'next/head'
-import VideoUpload from '../components/VideoUpload'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
-
+const Home = ({ files }: { files: string[] }) => {
+  console.log(files);
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -14,14 +15,32 @@ const Home: NextPage = () => {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome 
+          List of ur movies
         </h1>
-        <VideoUpload/>
+        <div>
+          <h2>
+          <Link href="/upload/UploadVideo">
+            <a style={{color:'blue'}}>Upload More Videos</a>
+            </Link>
+          </h2>
+          {files && files.map((file) => {
+            return (
+              <div  key={file} style={{display:'grid',placeContent:'center'}}>
+              <Link href={`/videos/${file}`}>
+                <a style={{color:'blue'}}>Go To {file}</a>
+                </Link>
+                </div>
+            )
+          })}
+        </div>
       </main>
-      <footer className={styles.footer}>
-      </footer>
     </div>
   )
+}
+Home.getInitialProps = async () => {
+  const res = await fetch('http://localhost:3000/api/videosList')
+  const json = await res.json()
+  return { files: json.files}
 }
 
 export default Home

@@ -1,8 +1,9 @@
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPageContext } from 'next'
 import Link from 'next/link'
 import VideoPlayer from "../../components/VideoPlayer";
 import { useRouter } from 'next/router'
 import styles from '../../styles/Home.module.css'
+
 
 function VideoPage() {
   const router = useRouter()
@@ -22,9 +23,7 @@ function VideoPage() {
 
 
 
-
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  // const { data } = await  // your fetch function here   
   return {
     props: {
       query:ctx.query
